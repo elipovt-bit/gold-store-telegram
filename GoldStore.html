@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#10131b">
+<title>Gold Store — Standoff 2</title>
+<style>
+:root{--bg:#10131b;--panel:#191e2a;--panel2:#222939;--text:#f4f6fb;--muted:#9da8bb;--accent:#f6c445;--line:#30394c;--green:#66d6a5}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#202a3c 0,#10131b 55%);color:var(--text);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;min-height:100vh}
+.wrap{max-width:1050px;margin:auto;padding:20px 16px 40px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:24px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.4px}.logo{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,#ffe17b,#e69b19);display:grid;place-items:center;color:#191b20;font-size:24px;box-shadow:0 8px 28px #f6c44526}
+.pill{border:1px solid var(--line);background:#ffffff08;color:var(--muted);padding:8px 12px;border-radius:99px;font-size:12px}
+.hero{padding:27px;border:1px solid #ffffff12;border-radius:24px;background:linear-gradient(120deg,#252f42,#171c27 72%);position:relative;overflow:hidden;margin-bottom:22px}
+.hero:after{content:"G";position:absolute;right:24px;top:-42px;font-size:210px;font-weight:1000;color:#ffffff06;pointer-events:none}
+.eyebrow{color:var(--accent);font-weight:800;font-size:12px;letter-spacing:1.7px;text-transform:uppercase}.hero h1{font-size:clamp(30px,6vw,48px);line-height:1.05;margin:10px 0 12px;max-width:550px}.hero p{color:var(--muted);max-width:560px;margin:0}
+.notice{margin-top:18px;color:#f4d98b;font-size:12px;max-width:700px}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:24px 0 14px}.toolbar h2{margin:0;font-size:22px}.cart-btn,.btn{border:0;border-radius:13px;padding:12px 15px;font-weight:800;cursor:pointer;transition:.15s}.cart-btn,.btn.primary{background:var(--accent);color:#191b20}.cart-btn:hover,.btn:hover{transform:translateY(-1px);filter:brightness(1.04)}.btn.secondary{background:var(--panel2);color:var(--text);border:1px solid var(--line)}.btn.danger{background:#49272c;color:#ffdfe1}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.product{border:1px solid var(--line);border-radius:19px;background:linear-gradient(180deg,#1b2230,#171c27);padding:17px;display:flex;flex-direction:column;min-height:218px}
+.coin{width:60px;height:60px;border-radius:18px;background:linear-gradient(135deg,#ffe788,#d99519);color:#33270c;display:grid;place-items:center;font-size:28px;margin-bottom:15px;box-shadow:inset 0 2px 0 #fff8}
+.product h3{font-size:18px;margin:0 0 4px}.product p{font-size:12px;color:var(--muted);margin:0 0 16px}.price-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto}.price{font-size:18px;font-weight:900}.add{border:1px solid #66552b;background:#3a311c;color:#ffe08a;width:38px;height:38px;border-radius:12px;font-size:23px;cursor:pointer}
+.section{margin-top:28px;border:1px solid var(--line);background:#171c27;border-radius:20px;padding:20px}.section h2{margin:0 0 12px;font-size:21px}.empty{color:var(--muted);padding:8px 0}.cart-line{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.cart-line:last-child{border-bottom:0}.cart-name{font-weight:750}.cart-sub{color:var(--muted);font-size:12px}.qty{display:flex;align-items:center;gap:8px}.qty button{width:29px;height:29px;border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:9px;font-size:17px;cursor:pointer}
+.total{display:flex;justify-content:space-between;align-items:center;margin:16px 0;font-size:18px;font-weight:900}.formrow{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field label{display:block;font-size:12px;color:var(--muted);margin:0 0 6px}.field input,.field textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;background:#10141e;color:var(--text);font:inherit;outline:none}.field input:focus,.field textarea:focus{border-color:var(--accent)}.field.full{grid-column:1/-1}.field textarea{min-height:78px;resize:vertical}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.small{font-size:12px;color:var(--muted);margin-top:12px}.orders{display:grid;gap:10px}.order{background:#111620;border:1px solid var(--line);border-radius:13px;padding:13px}.order strong{display:block}.order span{font-size:12px;color:var(--muted)}.footer{text-align:center;color:#778297;font-size:12px;margin-top:26px}
+@media(max-width:760px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{padding:22px}.hero:after{right:-10px;font-size:150px}.wrap{padding:14px 12px 30px}}
+@media(max-width:390px){.grid{grid-template-columns:1fr}.formrow{grid-template-columns:1fr}.field.full{grid-column:auto}.top{align-items:flex-start}.pill{max-width:140px;text-align:center}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><div class="logo">₲</div><div>GOLD STORE<div style="font-size:11px;color:var(--muted);font-weight:600;letter-spacing:1.2px">STANDOFF 2</div></div></div>
+    <div class="pill">DEMO · Оплата не подключена</div>
+  </header>
+  <section class="hero">
+    <div class="eyebrow">Твой игровой магазин</div>
+    <h1>Золото. Просто.<br>Удобно.</h1>
+    <p>Выбери набор в каталоге, добавь его в корзину и создай заявку. Оплата и выдача пока не подключены.</p>
+    <div class="notice">⚠️ Демонстрационный макет: товары и цены примерные. Перед запуском проверь правила игры о сторонней торговле.</div>
+  </section>
+
+  <div class="toolbar"><h2>🪙 Каталог</h2><button class="cart-btn" onclick="scrollToCart()">🛒 Корзина <span id="cartCount">0</span></button></div>
+  <section class="grid" id="products"></section>
+
+  <section class="section" id="cartSection">
+    <h2>🛒 Твоя корзина</h2>
+    <div id="cartItems" class="empty">Корзина пока пуста. Добавь товар из каталога.</div>
+    <div id="cartSummary" hidden>
+      <div class="total"><span>Итого</span><span id="total">0 ₸</span></div>
+      <div class="formrow">
+        <div class="field"><label for="customer">Твой Telegram @username (необязательно)</label><input id="customer" placeholder="@username"></div>
+        <div class="field"><label for="gameId">Игровой ID (необязательно)</label><input id="gameId" placeholder="Введи ID, если понадобится"></div>
+        <div class="field full"><label for="comment">Комментарий к заявке</label><textarea id="comment" placeholder="Дополнительная информация"></textarea></div>
+      </div>
+      <div class="actions"><button class="btn primary" onclick="createOrder()">Создать заявку</button><button class="btn secondary" onclick="clearCart()">Очистить корзину</button></div>
+      <p class="small">Создание заявки не является оплатой и не гарантирует выдачу товара. В этом демо заявка сохраняется только в этом браузере.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>📦 Мои заявки на этом устройстве</h2>
+    <div id="orders" class="orders"><div class="empty">Пока заявок нет.</div></div>
+    <div class="small">Данные хранятся локально в браузере. Они не отправляются владельцу магазина и могут пропасть при очистке данных сайта.</div>
+  </section>
+  <footer class="footer">GOLD STORE · Демонстрационная HTML-версия</footer>
+</div>
+<script>
+// После публикации сервера вставь сюда адрес API из Render, например:
+// const API_URL = "https://your-service.onrender.com/api/order";
+const API_URL = "PASTE_YOUR_RENDER_API_URL_HERE";
+const products = [
+  {id:"g100",name:"100 Gold",desc:"Небольшой набор",price:500},
+  {id:"g500",name:"500 Gold",desc:"Средний набор",price:2000},
+  {id:"g1000",name:"1 000 Gold",desc:"Популярный набор",price:3500},
+  {id:"g2500",name:"2 500 Gold",desc:"Большой набор",price:8000}
+];
+let cart = {};
+let orders = [];
+const money = n => new Intl.NumberFormat("ru-RU").format(n) + " ₸";
+function renderProducts(){
+ document.getElementById("products").innerHTML = products.map(p=>`
+  <article class="product"><div class="coin">₲</div><h3>${p.name}</h3><p>${p.desc}</p>
+  <div class="price-row"><span class="price">${money(p.price)}</span><button class="add" aria-label="Добавить ${p.name}" onclick="add('${p.id}')">+</button></div></article>`).join("");
+}
+function add(id){cart[id]=(cart[id]||0)+1;renderCart()}
+function change(id,delta){cart[id]=(cart[id]||0)+delta;if(cart[id]<=0)delete cart[id];renderCart()}
+function clearCart(){cart={};renderCart()}
+function scrollToCart(){document.getElementById("cartSection").scrollIntoView({behavior:"smooth"})}
+function renderCart(){
+ const entries=Object.entries(cart);
+ document.getElementById("cartCount").textContent=entries.reduce((s,[id,q])=>s+q,0);
+ const items=document.getElementById("cartItems"), summary=document.getElementById("cartSummary");
+ if(!entries.length){items.hidden=false;items.className="empty";items.textContent="Корзина пока пуста. Добавь товар из каталога.";summary.hidden=true;return}
+ items.hidden=false;items.className="";
+ items.innerHTML=entries.map(([id,q])=>{const p=products.find(x=>x.id===id);return `<div class="cart-line"><div><div class="cart-name">${p.name}</div><div class="cart-sub">${money(p.price)} за набор</div></div><div class="qty"><button onclick="change('${id}',-1)" aria-label="Уменьшить">−</button><b>${q}</b><button onclick="change('${id}',1)" aria-label="Увеличить">+</button></div></div>`}).join("");
+ const total=entries.reduce((s,[id,q])=>s+products.find(p=>p.id===id).price*q,0);
+ document.getElementById("total").textContent=money(total);summary.hidden=false;
+}
+async function createOrder(){
+ const entries=Object.entries(cart);if(!entries.length)return;
+ const items=entries.map(([id,q])=>{const p=products.find(x=>x.id===id);return `${p.name} × ${q}`}).join(", ");
+ const total=entries.reduce((s,[id,q])=>s+products.find(p=>p.id===id).price*q,0);
+ const order={id:Date.now().toString().slice(-6),items,total,customer:document.getElementById("customer").value.trim(),gameId:document.getElementById("gameId").value.trim(),comment:document.getElementById("comment").value.trim(),status:"Заявка отправлена администратору",date:new Date().toLocaleString("ru-RU")};
+ const button=document.querySelector('button[onclick="createOrder()"]');
+ if(API_URL==="PASTE_YOUR_RENDER_API_URL_HERE"){
+   alert("Сначала подключи сервер: вставь его URL в переменную API_URL в файле HTML.");
+   return;
+ }
+ button.disabled=true;button.textContent="Отправляем…";
+ try{
+   const response=await fetch(API_URL,{
+     method:"POST",
+     headers:{"Content-Type":"application/json"},
+     body:JSON.stringify({
+       items:entries.map(([id,q])=>({id,name:products.find(p=>p.id===id).name,quantity:q,unit_price:products.find(p=>p.id===id).price})),
+       total,
+       customer:order.customer,
+       game_id:order.gameId,
+       comment:order.comment
+     })
+   });
+   const result=await response.json().catch(()=>({}));
+   if(!response.ok)throw new Error(result.error||"Сервер не принял заявку");
+   order.id=result.order_id||order.id;
+   orders.unshift(order);
+   try{localStorage.setItem("goldstore_orders",JSON.stringify(orders))}catch(e){}
+   renderOrders();clearCart();
+   document.getElementById("customer").value="";document.getElementById("gameId").value="";document.getElementById("comment").value="";
+   alert("Заявка №"+order.id+" отправлена администратору в Telegram.");
+   document.getElementById("orders").scrollIntoView({behavior:"smooth"});
+ }catch(error){
+   alert("Не удалось отправить заявку: "+error.message+"\nПроверь, что сервер запущен и URL API указан правильно.");
+ }finally{
+   button.disabled=false;button.textContent="Создать заявку";
+ }
+}
+function renderOrders(){
+ const el=document.getElementById("orders");
+ if(!orders.length){el.innerHTML='<div class="empty">Пока заявок нет.</div>';return}
+ el.innerHTML=orders.map(o=>`<div class="order"><strong>Заявка №${o.id} · ${money(o.total)}</strong><div>${o.items}</div><span>${o.date} · ${o.status}</span>${o.customer?`<div class="small">Telegram: ${escapeHtml(o.customer)}</div>`:""}${o.gameId?`<div class="small">Игровой ID: ${escapeHtml(o.gameId)}</div>`:""}${o.comment?`<div class="small">${escapeHtml(o.comment)}</div>`:""}</div>`).join("");
+}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+try{orders=JSON.parse(localStorage.getItem("goldstore_orders")||"[]")}catch(e){orders=[]}
+renderProducts();renderCart();renderOrders();
+</script>
+</body>
+</html>
